@@ -118,7 +118,6 @@ Example DB connection string.
 Migrate the database, collect the static files and create a superuser.
 
 ```shell
-cd app-name
 python manage.py check --deploy
 python manage.py migrate
 python manage.py collectstatic
