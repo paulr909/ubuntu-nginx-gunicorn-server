@@ -116,6 +116,7 @@ Example DB connection string.
 
     postgres://db_user:db_password@db_host:db_port/db_name
 Migrate the database, collect the static files and create a superuser.
+
 ```shell
 cd app-name
 python manage.py check --deploy
