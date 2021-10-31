@@ -56,7 +56,7 @@ gpasswd -a app-name sudo
 
 Switch to the postgres user.
 ```shell
-sudo su – postgres
+sudo su - postgres
 ```
 Create a database user.
 ```shell
