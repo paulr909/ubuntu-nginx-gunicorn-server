@@ -1,4 +1,4 @@
-# Ubuntu NGINX Gunicorn Supervisor Django React Server setup #
+# Ubuntu Server with: NGINX Gunicorn Supervisor Django React #
 
 ## Deployment to a VPS
 
