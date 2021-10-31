@@ -1,4 +1,4 @@
-# Ubuntu Server with: NGINX Gunicorn Supervisor Django React #
+# Ubuntu Server with: NGINX Gunicorn Supervisor Django NodeJS #
 
 ## Deployment to a VPS
 
