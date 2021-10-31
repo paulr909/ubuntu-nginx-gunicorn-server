@@ -13,7 +13,6 @@ sudo apt -y upgrade
 ## Install Python 3.x
 Ubuntu 20.x comes with Python 3 pre-installed.
 ```shell
-sudo apt update
 python -V
 sudo apt install -y python3-pip
 ```
