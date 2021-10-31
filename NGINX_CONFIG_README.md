@@ -23,11 +23,11 @@
                 try_files $uri @proxy_to_app;
             }
 
-		    location /favicon.ico {
-			    alias /home/app-name/app-name/favicon.ico;
-		    }
+            location /favicon.ico {
+                alias /home/app-name/app-name/favicon.ico;
+            }
 
-		    error_page 404 /custom_404.html;
+            error_page 404 /custom_404.html;
             location = /custom_404.html {
                 root /usr/share/nginx/html;
                 internal;
