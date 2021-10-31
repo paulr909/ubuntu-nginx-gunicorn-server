@@ -1,7 +1,5 @@
 # Ubuntu Server with: NGINX Gunicorn Supervisor Django NodeJS #
-
 ## Deployment to a VPS
-
 Log in to the server using the terminal.
 ```shell
 ssh root@xx.xx.xxx.xx
@@ -42,7 +40,6 @@ sudo apt install python3-venv
 sudo apt install nodejs npm
 ```
 ## Create New Application User
-
 Choose the name of the application. Enter a password and optionally add extra info at the prompt.	
 ```shell
 adduser  app-name
@@ -51,9 +48,7 @@ Add the user to the sudoers list.
 ```shell
 gpasswd -a app-name sudo
 ```
-
 ## PostgreSQL Database Setup
-
 Switch to the postgres user.
 ```shell
 sudo su - postgres
@@ -74,9 +69,7 @@ Now exit the postgres user.
 ```shell
 exit
 ```
-
 ## Django Project Setup
-
 Switch to the application user.
 ```shell
 sudo su - app-name
@@ -89,10 +82,13 @@ Output:
 ```shell
 $ home/app-name
 ```
-
 Clone the repository with our code.
 ```shell
-git clone https://github.com/username/project.git
+git clone https://github.com/username/app-name.git
+```
+Change into project directory.
+```shell
+cd app-name
 ```
 Start a virtual environment.	
 ```shell
@@ -120,18 +116,15 @@ Inside the /home/app-name/app-name/ project directory, create the .env file to s
 Example DB connection string.
 
     postgres://db_user:db_password@db_host:db_port/db_name
-
 Migrate the database, collect the static files and create a superuser.
 ```shell
 cd app-name
-./manage.py check --deploy
-./manage.py migrate
-./manage.py collectstatic
-./manage.py createsuperuser	
+python manage.py check --deploy
+python manage.py migrate
+python manage.py collectstatic
+python manage.py createsuperuser	
 ```
-
 ## Configuring Gunicorn
-
 Gunicorn is responsible for executing the Django code behind a proxy server.
 Create a new file named gunicorn_start inside /home/app-name/app-name/	
 
@@ -171,7 +164,6 @@ Create two directories, one for the socket file and one to store the logs.
 ```shell
 mkdir run logs
 ```
-
 The directory structure inside /home/app-name/ should look like this.
 	
     app-name/
@@ -182,19 +174,14 @@ The directory structure inside /home/app-name/ should look like this.
 	venv/
 
 ## Configuring Supervisor
-
 Create an empty log file inside the /home/app-name/app-name/logs/ directory.
-
 ```shell
-	
 touch gunicorn.log
 ```
-
 Create a new supervisor file.
 ```shell
 sudo nano /etc/supervisor/conf.d/app-name.conf
 ```
-
 Add the below details.
 ```shell
 [program:app-name] 
@@ -210,7 +197,6 @@ Save the file and run the commands below.
 sudo supervisorctl reread
 sudo supervisorctl update
 ```
-
 Check the status.
 ```shell
 sudo supervisorctl status app-name
@@ -219,9 +205,7 @@ Output:
 ```shell
 $ app-name		RUNNING pid 333, uptime 0:00:07
 ```
-
 ## Configuring NGINX
-
 Set up the NGINX server to serve the static files and to pass the requests to Gunicorn.
 Add a new configuration file named app-name inside /etc/nginx/sites-available/.
 
@@ -255,24 +239,19 @@ Create a symbolic link to the sites-enabled directory.
 ```shell
 sudo ln -s /etc/nginx/sites-available/app-name /etc/nginx/sites-enabled/app-name
 ```
-
 Remove the default NGINX website.
 ```shell
 sudo rm /etc/nginx/sites-enabled/default
 ```
-
 Restart the NGINX service.
 ```shell
 sudo service nginx restart
 ```
-
 Any further code updates.	
 ```shell
 sudo supervisorctl restart app-name	
 ```
-
 ## Configuring HTTPS Certificate
-
 Protect the application with an HTTPS certificate provided by Lets Encrypt.
 ```shell
 sudo apt update
@@ -281,13 +260,12 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
 sudo apt install python-certbot-nginx
 ```
-
 Install the certs.
 ```shell
 sudo certbot –nginx
 ```
-
 Choose option 2 to redirect all HTTP traffic to HTTPS.	
+
 Set up the auto-renewal of the certs. Run the command below to edit the crontab file.
 ```shell
 sudo crontab -e
@@ -297,5 +275,4 @@ Add the following line to the end of the file.
 ```shell
 0 4 * * * /usr/bin/certbot renew –quiet
 ```
-
 This command will run every day at 4 am. All certificates expiring within 30 days will automatically be renewed.
