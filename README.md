@@ -37,6 +37,10 @@ sudo systemctl start supervisor
 ```shell
 sudo apt install python3-venv
 ```
+## Install Node.js
+```shell
+sudo apt install nodejs npm
+```
 ## Create New Application User
 
 Choose the name of the application. Enter a password and optionally add extra info at the prompt.	
