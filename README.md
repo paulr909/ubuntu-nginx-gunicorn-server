@@ -192,14 +192,15 @@ sudo nano /etc/supervisor/conf.d/app-name.conf
 ```
 
 Add the below details.
-	[program:app-name] 
-	command=/home/app-name/app-name/gunicorn_start 
-	user=app-name 
-    autostart=true 
-	autorestart=true 
-	redirect_stderr=true 
-	stdout_logfile=/home/app-name/app-name/logs/gunicorn.log
-
+```shell
+[program:app-name] 
+command=/home/app-name/app-name/gunicorn_start 
+user=app-name 
+autostart=true 
+autorestart=true 
+redirect_stderr=true 
+stdout_logfile=/home/app-name/app-name/logs/gunicorn.log
+```
 Save the file and run the commands below.
 ```shell
 sudo supervisorctl reread
