@@ -113,6 +113,6 @@
 
 ## Custom Error Pages
 
-We will put our custom error pages in the /usr/share/nginx/html/ directory where Ubuntu’s Nginx sets its default document root.
+We will put our custom error pages in the /usr/share/nginx/html/ directory where Ubuntu's Nginx sets its default document root.
 
 [https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-to-use-custom-error-pages-on-ubuntu-22-04](https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-to-use-custom-error-pages-on-ubuntu-22-04)
